@@ -170,7 +170,11 @@ const FounderSection = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           {/* Left: Image placeholder */}
           <div className="lg:col-span-5">
-            <div className="aspect-[3/4] bg-stet-grey-subtle" />
+           <img 
+  src="/founder.jpg" 
+  alt="Efe Olakpe" 
+  className="aspect-[3/4] object-cover w-full h-full" 
+/>
           </div>
 
           {/* Right: Body */}
@@ -182,7 +186,7 @@ const FounderSection = () => {
               style={{ transitionDelay: '140ms' }}
             >
               <p className="text-body text-stet-black mb-6">
-                STET Studio was founded by Efe — a trained architect who spent years
+                STET Studio was founded by Efe Olakpe — a trained architect who spent years
                 watching Nigerian businesses with genuinely excellent products struggle
                 to communicate that excellence through their brands.
               </p>
