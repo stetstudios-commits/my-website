@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import useScrollReveal from '../hooks/useScrollReveal';
+import founderImage from '../../founder.png';
 
 // Hero Section
 const Hero = () => {
@@ -171,7 +172,7 @@ const FounderSection = () => {
           {/* Left: Image placeholder */}
 <div className="lg:col-span-5">
   <img 
-    src="./founder.png" 
+    src={founderImage}
     alt="Efe Olakpe" 
     className="aspect-[3/4] object-cover w-full h-full" 
   />
