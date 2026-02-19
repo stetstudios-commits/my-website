@@ -171,7 +171,7 @@ const FounderSection = () => {
           {/* Left: Image placeholder */}
           <div className="lg:col-span-5">
            <img 
-  src="founder.png"
+  src="./founder.png"
   alt="Efe Olakpe" 
   className="aspect-[3/4] object-cover w-full h-full" 
 />
