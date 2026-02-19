@@ -29,7 +29,7 @@ const Hero = () => {
             }`}
             style={{ transitionDelay: '100ms' }}
           >
-            An architecture firm
+            An Architecture firm
           </h1>
         </div>
         <div className="overflow-hidden mb-10">
@@ -94,7 +94,7 @@ const PhilosophySection = () => {
               style={{ transitionDelay: '140ms' }}
             >
               <p className="text-body text-stet-black mb-6">
-                Your brand should function like the architecture of a well-designed
+                Your brand should function like the Architecture of a well-designed
                 building. Every element serves a purpose. All systems interlock and
                 scale. The structure guides how people move and interact. Form follows
                 function, always. Built to stand for decades, not seasons.
@@ -102,7 +102,7 @@ const PhilosophySection = () => {
               <p className="text-body text-stet-black mb-6">
                 Most agencies sell decoration — prettier logos, trendier colour
                 palettes, websites that look good until they don't. STET sells
-                architecture: the strategic infrastructure that makes a brand
+                Architecture: the strategic infrastructure that makes a brand
                 actually work as a business asset.
               </p>
             </div>
@@ -162,7 +162,7 @@ const FounderSection = () => {
           }`}
           style={{ transitionDelay: '70ms' }}
         >
-          Built by an architect
+          Built by an Architect
           <br />
           who saw a gap.
         </h2>
@@ -186,7 +186,7 @@ const FounderSection = () => {
               style={{ transitionDelay: '140ms' }}
             >
               <p className="text-body text-stet-black mb-6">
-                STET Studio was founded by Efe Olakpe — a trained architect who spent years
+                STET Studio was founded by Efe Olakpe — a trained Architect who spent years
                 watching Nigerian businesses with genuinely excellent products struggle
                 to communicate that excellence through their brands.
               </p>
@@ -530,7 +530,7 @@ const VisionSection = () => {
           style={{ transitionDelay: '140ms' }}
         >
           In 10 years, STET will be Nigeria's reference point for strategic brand
-          architecture — known for pioneering AI-augmented brand strategy, for
+          Architecture — known for pioneering AI-augmented brand strategy, for
           producing brands that genuinely compete internationally, and for raising
           the standard of what strategic branding means on this continent.
         </p>
