@@ -71,3 +71,4 @@ export default defineConfig([
   },
 ])
 ```
+My website is live!
