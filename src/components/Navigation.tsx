@@ -40,8 +40,10 @@ const Navigation = () => {
     { path: '/contact', label: 'Contact' },
   ];
 
-  const isActive = (path: string) => location.pathname === path;
-
+  const isActive = (path: string) => {
+  const currentPath = location.pathname + location.hash;
+  return currentPath.includes(path);
+};
   return (
     <>
       {/* Desktop Navigation */}
