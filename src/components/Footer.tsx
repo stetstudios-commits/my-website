@@ -53,6 +53,15 @@ const Footer = () => {
             >
               LinkedIn
             </a>
+
+            <a
+  href="https://x.com/yourusername"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="font-primary font-light text-[15px] text-stet-grey-mid hover:text-stet-black hover:underline transition-colors duration-200"
+>
+  X
+</a>
           </div>
 
           {/* Column 4: Location */}
