@@ -11,7 +11,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="min-h-[60vh] flex flex-col justify-center pt-32 pb-16">
+    <section className="min-h-[60vh] flex flex-col justify-center pt-40 pb-16">
       <div className="grid-container">
         <span
           className={`text-label block mb-5 transition-all duration-550 ease-out ${
@@ -21,7 +21,7 @@ const Hero = () => {
           Contact
         </span>
 
-        <div className="overflow-hidden mb-8">
+        <div className="mb-8">
           <h1
             className={`text-hero text-stet-black transition-all duration-700 ease-expo-out ${
               isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
