@@ -386,7 +386,7 @@ const ClosingSection = () => {
 
 <div className="mt-4">
   <a
-    href="https://x.com/efe_stet"
+    href="https://x.com/stet_ng"
     target="_blank"
     rel="noopener noreferrer"
     className={`text-cta text-white cta-link inline-block transition-all duration-700 ease-expo-out ${
