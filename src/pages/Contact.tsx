@@ -370,29 +370,35 @@ const ClosingSection = () => {
           client project.
         </p>
 
-        <a
-          href="https://linkedin.com/company/stet-studio"
-          target="_blank"
-          rel="noopener noreferrer"
-          className={`text-cta text-white cta-link inline-block transition-all duration-700 ease-expo-out ${
-            isVisible ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'
-          }`}
-          style={{ transitionDelay: '200ms' }}
-        >
-          Follow on LinkedIn<span className="cta-arrow">→</span>
-        </a>
-        <a
-  href="https://x.com/efe_stet"
-  target="_blank"
-  rel="noopener noreferrer"
-  className={`text-cta text-white cta-link inline-block transition-all duration-700 ease-expo-out ${
-    isVisible ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'
-  }`}
-  style={{ transitionDelay: '300ms' }}
->
-  Follow on X<span className="cta-arrow">→</span>
-</a>
-      </div>
+        <div>
+  <a
+    href="https://linkedin.com/company/stet-studio"
+    target="_blank"
+    rel="noopener noreferrer"
+    className={`text-cta text-white cta-link inline-block transition-all duration-700 ease-expo-out ${
+      isVisible ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'
+    }`}
+    style={{ transitionDelay: '200ms' }}
+  >
+    Follow on LinkedIn<span className="cta-arrow">→</span>
+  </a>
+</div>
+
+<div className="mt-4">
+  <a
+    href="https://x.com/efe_stet"
+    target="_blank"
+    rel="noopener noreferrer"
+    className={`text-cta text-white cta-link inline-block transition-all duration-700 ease-expo-out ${
+      isVisible ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'
+    }`}
+    style={{ transitionDelay: '300ms' }}
+  >
+    Follow on X<span className="cta-arrow">→</span>
+  </a>
+</div>
+
+</div>
     </section>
   );
 };
