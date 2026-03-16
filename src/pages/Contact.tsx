@@ -169,7 +169,8 @@ const FormSection = () => {
             }`}
             style={{ transitionDelay: '70ms' }}
           >
-            <form onSubmit={handleSubmit}>
+                        <form name="contact" method="POST" data-netlify="true" onSubmit={handleSubmit}>
+              <input type="hidden" name="form-name" value="contact" />
               <div className="mb-8">
                 <label htmlFor="name" className="text-form-label block mb-3">
                   Your name *
