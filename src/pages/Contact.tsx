@@ -88,20 +88,52 @@ const FormSection = () => {
     setFormData((prev) => ({ ...prev, budget }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Form validation
+    
+    // Form validation (keep your existing validation)
     if (!formData.name || !formData.email || !formData.businessDescription) {
       alert('Please fill in all required fields.');
       return;
     }
-    // Email validation
+    
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(formData.email)) {
       alert('Please enter a valid email address.');
       return;
     }
-    setIsSubmitted(true);
+
+    // Web3Forms submission
+    try {
+      const formDataObj = new FormData();
+      formDataObj.append('access_key', 'a6ac7626-6b13-46d4-aa97-9a93593d956c');
+      formDataObj.append('subject', 'New Client Inquiry - STET Studio');
+      formDataObj.append('from_name', 'STET Website');
+      
+      // Add all your form fields
+      formDataObj.append('name', formData.name);
+      formDataObj.append('email', formData.email);
+      formDataObj.append('businessName', formData.businessName);
+      formDataObj.append('businessDescription', formData.businessDescription);
+      formDataObj.append('challenge', formData.challenge);
+      formDataObj.append('budget', formData.budget);
+      formDataObj.append('source', formData.source);
+
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formDataObj
+      });
+
+      const data = await response.json();
+      
+      if (data.success) {
+        setIsSubmitted(true);
+      } else {
+        alert('Something went wrong. Please try again.');
+      }
+    } catch (error) {
+      alert('Failed to send message. Please try again.');
+    }
   };
 
   if (isSubmitted) {
@@ -169,8 +201,7 @@ const FormSection = () => {
             }`}
             style={{ transitionDelay: '70ms' }}
           >
-                        <form name="contact" method="POST" data-netlify="true" onSubmit={handleSubmit}>
-              <input type="hidden" name="form-name" value="contact" />
+                        <form onSubmit={handleSubmit}>
               <div className="mb-8">
                 <label htmlFor="name" className="text-form-label block mb-3">
                   Your name *
