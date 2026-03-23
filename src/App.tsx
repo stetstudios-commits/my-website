@@ -13,7 +13,7 @@ function App() {
   return (
     <Router>
       <ScrollToTop />
-      <div className="min-h-screen bg-white pt-33">
+      <div className="min-h-screen bg-white pt-34">
         <Navigation />
         <Routes>
           <Route path="/" element={<Home />} />
