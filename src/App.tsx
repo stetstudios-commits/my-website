@@ -13,7 +13,7 @@ function App() {
   return (
     <Router>
       <ScrollToTop />
-      <div className="min-h-screen bg-white pt-35">
+      <div className="min-h-screen bg-white" style={{ paddingTop: '136px' }}>
         <Navigation />
         <Routes>
           <Route path="/" element={<Home />} />
