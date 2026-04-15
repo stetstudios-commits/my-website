@@ -17,7 +17,7 @@ const Hero = () => {
         {/* Headline */}
         <div className="overflow-hidden mb-8">
           <h1
-            className={`text-hero text-stet-black transition-all duration-700 ease-expo-out ${
+            className={`text-hero text-stet-regular transition-all duration-700 ease-expo-out ${
               isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
             }`}
             style={{ transitionDelay: '100ms' }}
