@@ -12,7 +12,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="min-h-[60vh] flex flex-col justify-left pt-32 pb-16">
+    <section className="min-h-[60vh] flex flex-col justify-centre pt-32 pb-16">
       <div className="grid-container">
         <span
           className={`text-label block mb-5 transition-all duration-550 ease-out ${
