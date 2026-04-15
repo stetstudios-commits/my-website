@@ -66,7 +66,7 @@ const IntroSection = () => {
     <section ref={ref} className="section-padding bg-white">
       <div className="grid-container">
         <p
-          className={`font-primary font-light italic text-[clamp(20px,2.5vw,30px)] text-stet-black max-w-[680px] mx-auto text-center leading-relaxed transition-all duration-700 ease-expo-out ${
+          className={`font-primary font-light italic text-[clamp(20px,2.5vw,30px)] text-stet-black max-w-[680px] mx-auto text-left leading-relaxed transition-all duration-700 ease-expo-out ${
             isVisible ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'
           }`}
         >
