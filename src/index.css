@@ -92,7 +92,7 @@
   
   .text-hero-italic {
     font-family: var(--font-primary);
-    font-weight: 600;
+    font-weight: 400;
     font-style: italic;
     font-size: clamp(56px, 9vw, 130px);
     line-height: 0.93;
