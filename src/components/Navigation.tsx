@@ -15,12 +15,10 @@ const Navigation = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close mobile menu when route changes
   useEffect(() => {
     setIsMobileMenuOpen(false);
   }, [location]);
 
-  // Prevent body scroll when mobile menu is open
   useEffect(() => {
     if (isMobileMenuOpen) {
       document.body.style.overflow = 'hidden';
@@ -40,13 +38,10 @@ const Navigation = () => {
     { path: '/contact', label: 'Contact' },
   ];
 
-  const isActive = (path: string) => {
-  const currentPath = location.pathname + location.hash;
-  return currentPath.includes(path);
-};
+  const isActive = (path: string) => location.pathname === path;
+
   return (
     <>
-      {/* Desktop Navigation */}
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled ? 'bg-white/95 backdrop-blur-sm' : 'bg-transparent'
@@ -58,12 +53,10 @@ const Navigation = () => {
               isScrolled ? 'py-4' : 'py-6'
             }`}
           >
-            {/* Logo */}
             <Link to="/" className="text-nav-brand text-stet-black">
               STET
             </Link>
 
-            {/* Desktop Links */}
             <div className="hidden md:flex items-center gap-10">
               {navLinks.map((link) => (
                 <Link
@@ -78,7 +71,6 @@ const Navigation = () => {
               ))}
             </div>
 
-            {/* CTA Button */}
             <Link
               to="/contact"
               className="hidden md:block text-button border border-stet-black px-6 py-2 transition-all duration-250 hover:bg-stet-black hover:text-white"
@@ -86,11 +78,11 @@ const Navigation = () => {
               Start a Project
             </Link>
 
-            {/* Mobile Menu Button */}
             <button
               className="md:hidden flex flex-col gap-1.5 p-2"
               onClick={() => setIsMobileMenuOpen(true)}
               aria-label="Open menu"
+              type="button"
             >
               <span className="w-6 h-px bg-stet-black"></span>
               <span className="w-6 h-px bg-stet-black"></span>
@@ -99,7 +91,6 @@ const Navigation = () => {
           </div>
         </nav>
 
-        {/* Bottom border */}
         <div
           className={`h-px w-full transition-colors duration-300 ${
             isScrolled ? 'bg-stet-grey-border' : 'bg-stet-grey-light'
@@ -107,22 +98,20 @@ const Navigation = () => {
         />
       </header>
 
-      {/* Mobile Navigation Overlay */}
       <div
         className={`fixed inset-0 z-[100] bg-stet-black transition-opacity duration-250 ${
           isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
         }`}
       >
-        {/* Close Button */}
         <button
           className="absolute top-6 right-6 text-white text-3xl font-primary font-light"
           onClick={() => setIsMobileMenuOpen(false)}
           aria-label="Close menu"
+          type="button"
         >
           ×
         </button>
 
-        {/* Mobile Links */}
         <div className="flex flex-col items-center justify-center h-full gap-8">
           <Link
             to="/"
