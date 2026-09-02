@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import useScrollReveal from '../hooks/useScrollReveal';
 
-// Hero Section
 const Hero = () => {
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -12,7 +11,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="min-h-[60vh] flex flex-col justify-centre pt-32 pb-16">
+    <section className="min-h-[60vh] flex flex-col justify-center pt-32 pb-16">
       <div className="grid-container">
         <span
           className={`text-label block mb-5 transition-all duration-550 ease-out ${
@@ -46,7 +45,6 @@ const Hero = () => {
   );
 };
 
-// Placeholder Section
 const PlaceholderSection = () => {
   const { ref, isVisible } = useScrollReveal<HTMLDivElement>({ threshold: 0.15 });
 
@@ -88,7 +86,6 @@ const PlaceholderSection = () => {
   );
 };
 
-// Terrene Project Card
 const TerreneCard = () => {
   const { ref, isVisible } = useScrollReveal<HTMLDivElement>({ threshold: 0.15 });
 
@@ -110,20 +107,15 @@ const TerreneCard = () => {
             the full STET five-phase method from discovery through implementation.
           </p>
 
-          <p className="font-primary font-light italic text-sm text-stet-grey-mid mb-8">
-            *Strategic exploration. Full case study in development.*
+          <p className="font-primary font-light italic text-sm text-stet-grey-mid">
+            Strategic exploration. Full case study in development.
           </p>
-
-          <Link to="#" className="text-cta text-stet-black cta-link">
-            View Project Preview<span className="cta-arrow">→</span>
-          </Link>
         </div>
       </div>
     </section>
   );
 };
 
-// LinkedIn CTA Section (Black)
 const LinkedInSection = () => {
   const { ref, isVisible } = useScrollReveal<HTMLDivElement>({ threshold: 0.15 });
 
@@ -196,7 +188,6 @@ const LinkedInSection = () => {
   );
 };
 
-// Main Work Page
 const Work = () => {
   return (
     <main className="bg-white">

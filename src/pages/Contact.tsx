@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import useScrollReveal from '../hooks/useScrollReveal';
 
-// Hero Section
+const WEB3FORMS_KEY = 'a6ac7626-6b13-46d4-aa97-9a93593d956c';
+
 const Hero = () => {
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -11,7 +12,7 @@ const Hero = () => {
   }, []);
 
   return (
-   <section className="min-h-[60vh] flex flex-col justify-center pt-48 pb-16 mt-8">
+    <section className="min-h-[60vh] flex flex-col justify-center pt-24 pb-16">
       <div className="grid-container">
         <span
           className={`text-label block mb-5 transition-all duration-550 ease-out ${
@@ -21,7 +22,7 @@ const Hero = () => {
           Contact
         </span>
 
-        <div className="mb-8 overflow-visble">
+        <div className="mb-8 overflow-visible">
           <h1
             className={`text-hero text-stet-black transition-all duration-700 ease-expo-out ${
               isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
@@ -58,7 +59,6 @@ const Hero = () => {
   );
 };
 
-// Form Section
 const FormSection = () => {
   const { ref, isVisible } = useScrollReveal<HTMLDivElement>({ threshold: 0.15 });
   const [formData, setFormData] = useState({
@@ -69,8 +69,12 @@ const FormSection = () => {
     challenge: '',
     budget: '',
     source: '',
+    botcheck: '',
   });
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState('');
 
   const budgetOptions = [
     'Under ₦200k',
@@ -82,57 +86,65 @@ const FormSection = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+    setErrors((prev) => ({ ...prev, [name]: '' }));
+    setSubmitError('');
   };
 
   const handleBudgetSelect = (budget: string) => {
     setFormData((prev) => ({ ...prev, budget }));
   };
 
-    const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    // Form validation (keep your existing validation)
-    if (!formData.name || !formData.email || !formData.businessDescription) {
-      alert('Please fill in all required fields.');
-      return;
+  const validate = () => {
+    const next: Record<string, string> = {};
+    if (!formData.name.trim()) next.name = 'Name is required.';
+    if (!formData.email.trim()) next.email = 'Email is required.';
+    else if (!/[^\s@]+@[^\s@]+\.[^\s@]+/.test(formData.email)) {
+      next.email = 'Enter a valid email address.';
     }
-    
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(formData.email)) {
-      alert('Please enter a valid email address.');
-      return;
+    if (!formData.businessDescription.trim()) {
+      next.businessDescription = 'Tell us what the business does.';
     }
+    setErrors(next);
+    return Object.keys(next).length === 0;
+  };
 
-    // Web3Forms submission
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!validate()) return;
+    if (formData.botcheck) return;
+
+    setIsSubmitting(true);
+    setSubmitError('');
+
     try {
-      const formDataObj = new FormData();
-      formDataObj.append('access_key', 'a6ac7626-6b13-46d4-aa97-9a93593d956c');
-      formDataObj.append('subject', 'New Client Inquiry - STET Studio');
-      formDataObj.append('from_name', 'STET Website');
-      
-      // Add all your form fields
-      formDataObj.append('name', formData.name);
-      formDataObj.append('email', formData.email);
-      formDataObj.append('businessName', formData.businessName);
-      formDataObj.append('businessDescription', formData.businessDescription);
-      formDataObj.append('challenge', formData.challenge);
-      formDataObj.append('budget', formData.budget);
-      formDataObj.append('source', formData.source);
+      const payload = new FormData();
+      payload.append('access_key', WEB3FORMS_KEY);
+      payload.append('subject', 'New Client Inquiry - STET Studio');
+      payload.append('from_name', 'STET Website');
+      payload.append('name', formData.name);
+      payload.append('email', formData.email);
+      payload.append('businessName', formData.businessName);
+      payload.append('businessDescription', formData.businessDescription);
+      payload.append('challenge', formData.challenge);
+      payload.append('budget', formData.budget);
+      payload.append('source', formData.source);
+      payload.append('botcheck', formData.botcheck);
 
       const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        body: formDataObj
+        body: payload,
       });
 
       const data = await response.json();
-      
       if (data.success) {
         setIsSubmitted(true);
       } else {
-        alert('Something went wrong. Please try again.');
+        setSubmitError('Something went wrong. Please try again, or email hello@stet.ng.');
       }
-    } catch (error) {
-      alert('Failed to send message. Please try again.');
+    } catch {
+      setSubmitError('Failed to send. Check your connection, or email hello@stet.ng.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -156,7 +168,6 @@ const FormSection = () => {
     <section ref={ref} className="section-padding bg-white">
       <div className="grid-container">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-          {/* Left: Intro */}
           <div
             className={`lg:col-span-5 transition-all duration-550 ease-out ${
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'
@@ -189,19 +200,31 @@ const FormSection = () => {
 
             <p className="font-primary font-light italic text-sm text-stet-grey-mid">
               We don't do discovery calls before understanding the basics
-              of your brief. The form above ensures our first conversation
+              of your brief. This form ensures our first conversation
               is substantive rather than exploratory.
             </p>
           </div>
 
-          {/* Right: Form */}
           <div
             className={`lg:col-span-7 transition-all duration-550 ease-out ${
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'
             }`}
             style={{ transitionDelay: '70ms' }}
           >
-                        <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} noValidate>
+              <div className="absolute -left-[9999px] h-0 w-0 overflow-hidden" aria-hidden="true">
+                <label htmlFor="botcheck">Leave empty</label>
+                <input
+                  type="text"
+                  id="botcheck"
+                  name="botcheck"
+                  value={formData.botcheck}
+                  onChange={handleChange}
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
+              </div>
+
               <div className="mb-8">
                 <label htmlFor="name" className="text-form-label block mb-3">
                   Your name *
@@ -215,6 +238,7 @@ const FormSection = () => {
                   className="form-input"
                   required
                 />
+                {errors.name && <p className="text-form-error">{errors.name}</p>}
               </div>
 
               <div className="mb-8">
@@ -244,6 +268,7 @@ const FormSection = () => {
                   className="form-input"
                   required
                 />
+                {errors.email && <p className="text-form-error">{errors.email}</p>}
               </div>
 
               <div className="mb-8">
@@ -259,6 +284,9 @@ const FormSection = () => {
                   rows={3}
                   required
                 />
+                {errors.businessDescription && (
+                  <p className="text-form-error">{errors.businessDescription}</p>
+                )}
               </div>
 
               <div className="mb-8">
@@ -307,8 +335,10 @@ const FormSection = () => {
                 />
               </div>
 
-              <button type="submit" className="btn-submit">
-                Send →
+              {submitError && <p className="text-form-error mb-6">{submitError}</p>}
+
+              <button type="submit" className="btn-submit" disabled={isSubmitting}>
+                {isSubmitting ? 'Sending…' : 'Send →'}
               </button>
             </form>
           </div>
@@ -318,7 +348,6 @@ const FormSection = () => {
   );
 };
 
-// What Happens Next Section
 const WhatHappensNextSection = () => {
   const { ref, isVisible } = useScrollReveal<HTMLDivElement>({ threshold: 0.15 });
 
@@ -375,7 +404,6 @@ const WhatHappensNextSection = () => {
   );
 };
 
-// Closing Section (Black)
 const ClosingSection = () => {
   const { ref, isVisible } = useScrollReveal<HTMLDivElement>({ threshold: 0.15 });
 
@@ -403,39 +431,37 @@ const ClosingSection = () => {
         </p>
 
         <div>
-  <a
-    href="https://linkedin.com/company/stet-studio"
-    target="_blank"
-    rel="noopener noreferrer"
-    className={`text-cta text-white cta-link inline-block transition-all duration-700 ease-expo-out ${
-      isVisible ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'
-    }`}
-    style={{ transitionDelay: '200ms' }}
-  >
-    Follow on LinkedIn<span className="cta-arrow">→</span>
-  </a>
-</div>
+          <a
+            href="https://linkedin.com/company/stet-studio"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`text-cta text-white cta-link inline-block transition-all duration-700 ease-expo-out ${
+              isVisible ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'
+            }`}
+            style={{ transitionDelay: '200ms' }}
+          >
+            Follow on LinkedIn<span className="cta-arrow">→</span>
+          </a>
+        </div>
 
-<div className="mt-4">
-  <a
-    href="https://x.com/stet_ng"
-    target="_blank"
-    rel="noopener noreferrer"
-    className={`text-cta text-white cta-link inline-block transition-all duration-700 ease-expo-out ${
-      isVisible ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'
-    }`}
-    style={{ transitionDelay: '300ms' }}
-  >
-    Follow on X<span className="cta-arrow">→</span>
-  </a>
-</div>
-
-</div>
+        <div className="mt-4">
+          <a
+            href="https://x.com/stet_ng"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`text-cta text-white cta-link inline-block transition-all duration-700 ease-expo-out ${
+              isVisible ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'
+            }`}
+            style={{ transitionDelay: '300ms' }}
+          >
+            Follow on X<span className="cta-arrow">→</span>
+          </a>
+        </div>
+      </div>
     </section>
   );
 };
 
-// Main Contact Page
 const Contact = () => {
   return (
     <main className="bg-white">

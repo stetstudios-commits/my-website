@@ -1,0 +1,21 @@
+:root {
+  --nav-height: 134px;
+}
+
+.app-shell {
+  padding-top: var(--nav-height);
+}
+
+.btn-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.text-form-error {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-style: italic;
+  font-size: 14px;
+  color: #8a1f1f;
+  margin-top: 8px;
+}
