@@ -8,12 +8,13 @@ import Services from './pages/Services';
 import Method from './pages/Method';
 import Work from './pages/Work';
 import Contact from './pages/Contact';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
     <Router>
       <ScrollToTop />
-      <div className="min-h-screen bg-white" style={{ paddingTop: '134px' }}>
+      <div className="min-h-screen bg-white app-shell">
         <Navigation />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -22,6 +23,7 @@ function App() {
           <Route path="/method" element={<Method />} />
           <Route path="/work" element={<Work />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
       </div>
