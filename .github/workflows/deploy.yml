@@ -39,8 +39,8 @@ jobs:
           cp logo.png dist/logo.png
           cp og-image.png dist/og-image.png
 
-      - name: SPA fallback for GitHub Pages
-        run: cp dist/index.html dist/404.html
+      - name: Write real HTML files for each route
+        run: node scripts/prepare-pages.mjs
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
